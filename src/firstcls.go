@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+
 func main(){
 	var foo = func(x int) int {
 		return x + 5
