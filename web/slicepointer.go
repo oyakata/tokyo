@@ -33,10 +33,15 @@ func main() {
 	fmt.Println(id(bar))
 	fmt.Println(id(bar))
 
-	// ポインタのポインタを渡そうとするとコンパイルエラー
+	// 非ポインタで宣言した引数にポインタを渡そうとするとコンパイルエラー
 	// cannot use bar (type *Foo) as type Foo in argument to id2
 	// fmt.Println(id2(bar))
 	// fmt.Println(id2(bar))
+
+	// ポインタのアドレスを渡そうとしてもコンパイルエラー
+	// cannot use &bar (type **Foo) as type Foo in argument to id2
+	// fmt.Println(id2(&bar))
+	// fmt.Println(id2(&bar))
 
 	/*	結果
 
