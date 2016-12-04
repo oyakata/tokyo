@@ -1,10 +1,9 @@
 package main
 
 import (
-	"fmt"
-	ikzo "github.com/oyakata/ikzo/lib"
+	"github.com/oyakata/ikzo/hello"
 )
 
 func main() {
-	fmt.Println(ikzo.Hello())
+	hello.World()
 }
