@@ -23,8 +23,7 @@ func Even(x int) error {
 func Sum(xs ...int) (result int, e error) {
 	var err error
 	for _, x := range xs {
-		err = PositiveInt(x)
-		if err != nil {
+		if err = PositiveInt(x); err != nil {
 			if e == nil {
 				e = errors.New("Sum")
 			}
@@ -40,8 +39,7 @@ func Sum(xs ...int) (result int, e error) {
 func SumEasily(xs ...int) (result int, e error) {
 	var err error
 	for _, x := range xs {
-		err = PositiveInt(x)
-		if err != nil {
+		if err = PositiveInt(x); err != nil {
 			if e == nil {
 				e = errors.New("SumEasily")
 			}
