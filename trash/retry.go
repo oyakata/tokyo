@@ -30,7 +30,7 @@ func (c *Challenger) Attack() (ok bool, err error) {
 			// ここはパニックが起きなかった場合が該当する
 			fmt.Println("No error.")
 		case Retryable{}:
-			err = fmt.Errorf("Failed(%v times)", c.count)
+			err = fmt.Errorf("failed(%v times)", c.count)
 		default:
 			panic(p)
 		}
@@ -42,9 +42,9 @@ func (c *Challenger) Attack() (ok bool, err error) {
 func main() {
 	var c *Challenger
 	c = &Challenger{0, 3}
-	fmt.Println(c.Attack()) // false Failed(1 times)
-	fmt.Println(c.Attack()) // false Failed(2 times)
-	fmt.Println(c.Attack()) // false Failed(3 times)
+	fmt.Println(c.Attack()) // false failed(1 times)
+	fmt.Println(c.Attack()) // false failed(2 times)
+	fmt.Println(c.Attack()) // false failed(3 times)
 	fmt.Println(c.Attack()) // true <nil>
 	fmt.Println(c.Attack()) // 以下panic
 
