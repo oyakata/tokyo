@@ -26,3 +26,5 @@ _testmain.go
 # Others
 web/_go
 src/.go
+.vscode/
+debug
