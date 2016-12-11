@@ -48,6 +48,15 @@ func main() {
 		// https://golang.org/pkg/time/#Duration
 		// fmt.Print(int64(second/time.Millisecond)) // prints 1000
 		// fmt.Print(time.Duration(seconds)*time.Second) // prints 10s
+
+		// [追記 11:45]
+
+		// > 掛け算とわり算でやり方が違う
+
+		// これはそういうことじゃなくて、割り算の例は、Duration -> int64に、
+		// 掛け算の例はint64 -> Durationに変換している例だと思う。
+
+		// time.SleepはDurationを引数に取るので注意
 	}
 
 	// ANSIエスケープコードを使ってコンソール制御
