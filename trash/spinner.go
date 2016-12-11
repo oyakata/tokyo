@@ -66,4 +66,5 @@ func main() {
 	fmt.Printf("\033[2K\033[G") // 行を消し、その後カーソルを行頭に移動
 	// [ok] だけ色を緑に変える
 	fmt.Printf("\033[32m[ok]\033[39m %v かかりました\n", acc)
+	// fmt.Printf("\r%v かかりました\n", acc)
 }
