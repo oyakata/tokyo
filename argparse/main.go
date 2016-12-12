@@ -3,17 +3,35 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math"
 	"os"
+	"regexp"
+	"strconv"
+	"strings"
 )
+
+var regex = regexp.MustCompile("^-v+$")
+
+// 引数からメッセージ詳細度を算出する。算出に使わなかった引数は戻り値のスライスに返却する。
+func Verbosity(xs []string) (int, []string) {
+	var v float64
+	others := make([]string, 0, len(xs))
+	for _, x := range xs {
+		if regex.MatchString(x) {
+			v = math.Max(v, float64(strings.Count(x, "v")))
+		} else {
+			others = append(others, x)
+		}
+	}
+	return int(v), others
+}
 
 func main() {
 	help := flag.NewFlagSet("help", flag.ExitOnError)
-	verbose := help.Bool("v", false, "詳しく")
-	moreVerbose := help.Bool("vv", false, "より詳しく")
-	mostVerbose := help.Bool("vvv", false, "最も詳しく") // FIXME: 4つ以上vが続いたら3つで処理したい
+	var verbosity int
+	help.IntVar(&verbosity, "verbosity", 0, "")
 
 	money := flag.NewFlagSet("money", flag.ExitOnError)
-
 	if len(os.Args) == 1 {
 		fmt.Println("usage: argparse <command> [<args>]")
 		fmt.Println("\thelp: ヘルプをプリントします")
@@ -23,7 +41,12 @@ func main() {
 
 	switch os.Args[1] {
 	case "help":
-		help.Parse(os.Args[2:])
+		v, others := Verbosity(os.Args[2:])
+		help.Parse(others)
+		if verbosity < v {
+			// e.g. <cmd> help -verbosity=0 -vvv
+			help.Set("verbosity", strconv.Itoa(v))
+		}
 	case "money":
 		money.Parse(os.Args[2:])
 	default:
@@ -33,13 +56,13 @@ func main() {
 
 	if help.Parsed() {
 		message := "Help me."
-		if *verbose {
+		if verbosity == 1 {
 			message = "Help me!"
 		}
-		if *moreVerbose {
+		if verbosity == 2 {
 			message = "Help me!!"
 		}
-		if *mostVerbose {
+		if verbosity >= 3 {
 			message = "HELP ME!!"
 		}
 		fmt.Println(message)
