@@ -40,7 +40,7 @@ func PrintMemory() {
 }
 
 func main() {
-	PrintMemory()
+	PrintMemory() // 47504 47504 47504 884736
 
 	buf := NewBuffer()
 
@@ -48,8 +48,7 @@ func main() {
 		buf.Append("Hello").Append(", ").Append("world.")
 		buf.Append(LF).Append("I have a ").Append("pen.")
 	}
-	// fmt.Println(buf.String(), buf.size, buf.err)
-	fmt.Println(buf.size, buf.err)
+	fmt.Println(buf.size, buf.err) // 675000 <nil>
 
-	PrintMemory()
+	PrintMemory() // 2348200 2348200 2348200 3112960
 }
